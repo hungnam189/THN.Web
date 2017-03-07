@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title | Quản lý Website</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    @Html.Partial("_PartialAdminHead")
+    @RenderSection("Css", required: false)
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <!-- Header -->
+        @Html.Partial("_PartialAdminHeader")
+        <!-- END:  Header -->
+        <!--START: Left menu -->
+        @Html.Partial("_PartialAdminLeftMenu")
+        <!--END: Left Menu -->
+        <!-- Start: Content -->
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        <!-- End: Content -->
+        <!-- END: Footer-->
+        @Html.Partial("_PartialAdminFooter")
+        <!-- END: Footer-->
+    </div><!-- /.wrapper -->
+    @Html.Partial("_PartialAdminScripts")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

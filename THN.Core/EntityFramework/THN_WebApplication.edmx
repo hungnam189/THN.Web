@@ -1,0 +1,689 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="THN_WebApplicationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppSettings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="250" />
+          <Property Name="CompanyAddress" Type="nvarchar" MaxLength="350" />
+          <Property Name="CompanyAddress1" Type="nvarchar" MaxLength="350" />
+          <Property Name="CompanyAddress2" Type="nvarchar" MaxLength="350" />
+          <Property Name="CompanyTel" Type="varchar" MaxLength="20" />
+          <Property Name="CompanyTel1" Type="varchar" MaxLength="20" />
+          <Property Name="CompanyTel2" Type="varchar" MaxLength="20" />
+          <Property Name="HotPhone" Type="varchar" MaxLength="20" />
+          <Property Name="HotPhone2" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Email1" Type="varchar" MaxLength="100" />
+          <Property Name="Email2" Type="varchar" MaxLength="100" />
+          <Property Name="NameShort" Type="nvarchar" MaxLength="150" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="250" />
+          <Property Name="TaxCode" Type="int" />
+          <Property Name="DefaultTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="PageTitleSEO" Type="nvarchar" MaxLength="250" />
+          <Property Name="MetaKeyword" Type="nvarchar" MaxLength="350" />
+          <Property Name="MetaDescription" Type="nvarchar" MaxLength="350" />
+          <Property Name="Logo" Type="varchar" MaxLength="150" />
+          <Property Name="FacebookUrl" Type="varchar" MaxLength="350" />
+          <Property Name="TwitterUrl" Type="varchar" MaxLength="350" />
+          <Property Name="YoutubeUrl" Type="varchar" MaxLength="350" />
+          <Property Name="GooglePlusUrl" Type="varchar" MaxLength="350" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Slug" Type="varchar" MaxLength="500" />
+          <Property Name="Picture" Type="varchar" MaxLength="250" />
+          <Property Name="Parent" Type="int" Nullable="false" />
+          <Property Name="Visible" Type="int" />
+          <Property Name="OrderBy" Type="int" />
+          <Property Name="MetaTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="MetaKeyword" Type="nvarchar" MaxLength="350" />
+          <Property Name="MetaDescription" Type="nvarchar" MaxLength="350" />
+        </EntityType>
+        <EntityType Name="Functions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="ControllerName" Type="varchar" MaxLength="150" />
+          <Property Name="ActionName" Type="varchar" MaxLength="150" />
+          <Property Name="Path" Type="varchar" MaxLength="500" />
+          <Property Name="Visibled" Type="bit" />
+          <Property Name="Parent" Type="int" />
+          <Property Name="Level" Type="int" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Slug" Type="varchar" MaxLength="500" />
+          <Property Name="Picture" Type="varchar" MaxLength="250" />
+          <Property Name="Visibled" Type="int" />
+          <Property Name="OrderBy" Type="int" />
+          <Property Name="MetaTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="MetaKeyword" Type="nvarchar" MaxLength="350" />
+          <Property Name="MetaDescription" Type="nvarchar" MaxLength="350" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FuncID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="350" />
+          <Property Name="Detail" Type="ntext" />
+          <Property Name="Slug" Type="varchar" MaxLength="500" />
+          <Property Name="Picture" Type="varchar" MaxLength="250" />
+          <Property Name="Visibled" Type="int" />
+          <Property Name="IsNew" Type="bit" />
+          <Property Name="IsHot" Type="bit" />
+          <Property Name="IsHome" Type="bit" />
+          <Property Name="CountView" Type="int" />
+          <Property Name="OrderBy" Type="int" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="MenufactureID" Type="int" />
+          <Property Name="MetaTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="MetaKeyword" Type="nvarchar" MaxLength="350" />
+          <Property Name="MetaDescription" Type="nvarchar" MaxLength="350" />
+          <Property Name="ProductTags" Type="nvarchar" MaxLength="350" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ProductImages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" />
+          <Property Name="AltImages" Type="nvarchar" MaxLength="250" />
+          <Property Name="FileSave" Type="varchar" MaxLength="250" />
+          <Property Name="OrderBy" Type="int" />
+          <Property Name="Visibled" Type="bit" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupportCustomer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supporter" Type="nvarchar" MaxLength="200" />
+          <Property Name="Telphone" Type="varchar" MaxLength="100" />
+          <Property Name="Skype" Type="varchar" MaxLength="100" />
+          <Property Name="Orther" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Addrress" Type="nvarchar" MaxLength="250" />
+          <Property Name="Mobile" Type="varchar" MaxLength="250" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="UPassword" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="SeretKey" Type="varchar" MaxLength="200" />
+          <Property Name="Visibled" Type="bit" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="ComputerName" Type="varchar" MaxLength="100" />
+          <Property Name="IPAddress" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Members_Functions">
+          <End Role="Functions" Type="Self.Functions" Multiplicity="1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Functions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="FuncID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_CategoryID">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_MenufactureID">
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MenufactureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductImages_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductImages" Type="Self.ProductImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductImages">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="THN_WebApplicationModelStoreContainer">
+          <EntitySet Name="AppSettings" EntityType="Self.AppSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductImages" EntityType="Self.ProductImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupportCustomer" EntityType="Self.SupportCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Members_Functions" Association="Self.FK_Members_Functions">
+            <End Role="Functions" EntitySet="Functions" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Users" Association="Self.FK_Members_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_CategoryID" Association="Self.FK_Product_CategoryID">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_MenufactureID" Association="Self.FK_Product_MenufactureID">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductImages_Product" Association="Self.FK_ProductImages_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductImages" EntitySet="ProductImages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="THN_WebApplicationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyAddress1" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyAddress2" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyTel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyTel1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyTel2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HotPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HotPhone2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NameShort" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Owner" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TaxCode" Type="Int32" />
+          <Property Name="DefaultTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PageTitleSEO" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MetaKeyword" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDescription" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FacebookUrl" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="TwitterUrl" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="YoutubeUrl" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="GooglePlusUrl" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Slug" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Parent" Type="Int32" Nullable="false" />
+          <Property Name="Visible" Type="Int32" />
+          <Property Name="OrderBy" Type="Int32" />
+          <Property Name="MetaTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MetaKeyword" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDescription" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_CategoryID" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ControllerName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ActionName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Path" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Visibled" Type="Boolean" />
+          <Property Name="Parent" Type="Int32" />
+          <Property Name="Level" Type="Int32" />
+          <NavigationProperty Name="Members" Relationship="THN_WebApplicationModel.FK_Members_Functions" FromRole="Function" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Slug" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Visibled" Type="Int32" />
+          <Property Name="OrderBy" Type="Int32" />
+          <Property Name="MetaTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MetaKeyword" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDescription" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_MenufactureID" FromRole="Manufacturer" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShortDescription" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Slug" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Visibled" Type="Int32" />
+          <Property Name="IsNew" Type="Boolean" />
+          <Property Name="IsHot" Type="Boolean" />
+          <Property Name="IsHome" Type="Boolean" />
+          <Property Name="CountView" Type="Int32" />
+          <Property Name="OrderBy" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="MenufactureID" Type="Int32" />
+          <Property Name="MetaTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MetaKeyword" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDescription" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="ProductTags" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Product_CategoryID" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_MenufactureID" FromRole="Product" ToRole="Manufacturer" />
+          <NavigationProperty Name="ProductImages" Relationship="Self.FK_ProductImages_Product" FromRole="Product" ToRole="ProductImages" />
+        </EntityType>
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AltImages" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FileSave" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="OrderBy" Type="Int32" />
+          <Property Name="Visibled" Type="Boolean" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductImages_Product" FromRole="ProductImages" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="SupportCustomer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supporter" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Telphone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Skype" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Orther" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Addrress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SeretKey" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Visibled" Type="Boolean" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="ComputerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Members" Relationship="THN_WebApplicationModel.FK_Members_Users" FromRole="User" ToRole="Member" />
+        </EntityType>
+        <Association Name="FK_Product_CategoryID">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_MenufactureID">
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MenufactureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductImages_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductImages" Type="Self.ProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProductImages">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="THN_WebApplicationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppSettings" EntityType="Self.AppSetting" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Functions" EntityType="Self.Function" />
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturer" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
+          <EntitySet Name="SupportCustomers" EntityType="Self.SupportCustomer" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Product_CategoryID" Association="Self.FK_Product_CategoryID">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_MenufactureID" Association="Self.FK_Product_MenufactureID">
+            <End Role="Manufacturer" EntitySet="Manufacturers" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductImages_Product" Association="Self.FK_ProductImages_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductImages" EntitySet="ProductImages" />
+          </AssociationSet>
+          <EntitySet Name="Members" EntityType="THN_WebApplicationModel.Member" />
+          <AssociationSet Name="FK_Members_Functions" Association="THN_WebApplicationModel.FK_Members_Functions">
+            <End Role="Function" EntitySet="Functions" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Members_Users" Association="THN_WebApplicationModel.FK_Members_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FuncID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Function" Relationship="THN_WebApplicationModel.FK_Members_Functions" FromRole="Member" ToRole="Function" />
+          <NavigationProperty Name="User" Relationship="THN_WebApplicationModel.FK_Members_Users" FromRole="Member" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Members_Functions">
+          <End Type="THN_WebApplicationModel.Function" Role="Function" Multiplicity="1" />
+          <End Type="THN_WebApplicationModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Function">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="FuncID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Users">
+          <End Type="THN_WebApplicationModel.User" Role="User" Multiplicity="1" />
+          <End Type="THN_WebApplicationModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="THN_WebApplicationModelStoreContainer" CdmEntityContainer="THN_WebApplicationEntities">
+          <EntitySetMapping Name="AppSettings">
+            <EntityTypeMapping TypeName="THN_WebApplicationModel.AppSetting">
+              <MappingFragment StoreEntitySet="AppSettings">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="CompanyAddress1" ColumnName="CompanyAddress1" />
+                <ScalarProperty Name="CompanyAddress2" ColumnName="CompanyAddress2" />
+                <ScalarProperty Name="CompanyTel" ColumnName="CompanyTel" />
+                <ScalarProperty Name="CompanyTel1" ColumnName="CompanyTel1" />
+                <ScalarProperty Name="CompanyTel2" ColumnName="CompanyTel2" />
+                <ScalarProperty Name="HotPhone" ColumnName="HotPhone" />
+                <ScalarProperty Name="HotPhone2" ColumnName="HotPhone2" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="NameShort" ColumnName="NameShort" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+                <ScalarProperty Name="DefaultTitle" ColumnName="DefaultTitle" />
+                <ScalarProperty Name="PageTitleSEO" ColumnName="PageTitleSEO" />
+                <ScalarProperty Name="MetaKeyword" ColumnName="MetaKeyword" />
+                <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="FacebookUrl" ColumnName="FacebookUrl" />
+                <ScalarProperty Name="TwitterUrl" ColumnName="TwitterUrl" />
+                <ScalarProperty Name="YoutubeUrl" ColumnName="YoutubeUrl" />
+                <ScalarProperty Name="GooglePlusUrl" ColumnName="GooglePlusUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="THN_WebApplicationModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
+                <ScalarProperty Name="MetaKeyword" ColumnName="MetaKeyword" />
+                <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Functions">
+            <EntityTypeMapping TypeName="THN_WebApplicationModel.Function">
+              <MappingFragment StoreEntitySet="Functions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Visibled" ColumnName="Visibled" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturers">
+            <EntityTypeMapping TypeName="THN_WebApplicationModel.Manufacturer">
+              <MappingFragment StoreEntitySet="Manufacturer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Visibled" ColumnName="Visibled" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
+                <ScalarProperty Name="MetaKeyword" ColumnName="MetaKeyword" />
+                <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="THN_WebApplicationModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Visibled" ColumnName="Visibled" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="IsHot" ColumnName="IsHot" />
+                <ScalarProperty Name="IsHome" ColumnName="IsHome" />
+                <ScalarProperty Name="CountView" ColumnName="CountView" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="MenufactureID" ColumnName="MenufactureID" />
+                <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
+                <ScalarProperty Name="MetaKeyword" ColumnName="MetaKeyword" />
+                <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+                <ScalarProperty Name="ProductTags" ColumnName="ProductTags" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductImages">
+            <EntityTypeMapping TypeName="THN_WebApplicationModel.ProductImage">
+              <MappingFragment StoreEntitySet="ProductImages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AltImages" ColumnName="AltImages" />
+                <ScalarProperty Name="FileSave" ColumnName="FileSave" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="Visibled" ColumnName="Visibled" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupportCustomers">
+            <EntityTypeMapping TypeName="THN_WebApplicationModel.SupportCustomer">
+              <MappingFragment StoreEntitySet="SupportCustomer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Supporter" ColumnName="Supporter" />
+                <ScalarProperty Name="Telphone" ColumnName="Telphone" />
+                <ScalarProperty Name="Skype" ColumnName="Skype" />
+                <ScalarProperty Name="Orther" ColumnName="Orther" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="THN_WebApplicationModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Addrress" ColumnName="Addrress" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UPassword" ColumnName="UPassword" />
+                <ScalarProperty Name="SeretKey" ColumnName="SeretKey" />
+                <ScalarProperty Name="Visibled" ColumnName="Visibled" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="ComputerName" ColumnName="ComputerName" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="THN_WebApplicationModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FuncID" ColumnName="FuncID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
