@@ -34,13 +34,17 @@ namespace THN.Core.Filters
             try
             {
                 //string urlLogin = WebConfigurationManager.ConnectionStrings["webLogin"] != null ? WebConfigurationManager.ConnectionStrings["webLogin"].ConnectionString : "";
-                //string url = httpContext.Request.Url.ToString();
+                string url = httpContext.Request.Url.ToString();
                 //urlLogin = urlLogin + HttpUtility.UrlEncode(url);
 
                 var db = new THN.Core.EntityFramework.THN_WebApplicationEntities();
                 string actionName = httpContext.Request.RequestContext.RouteData.Values["action"].ToString();
                 string controllerName = httpContext.Request.RequestContext.RouteData.Values["controller"].ToString();
 
+                FunctionSessionModel sessionModel = new FunctionSessionModel();
+                sessionModel.Controller = controllerName;
+                sessionModel.Action = actionName;
+                httpContext.Session["THNMenu"] = sessionModel;
 
 
                 //Kiểm tra Session Login
@@ -52,16 +56,17 @@ namespace THN.Core.Filters
                         httpContext.Response.Redirect("/Administrator/Error/JsonAccessFail");
                         return false;
                     }
-                    httpContext.Response.Redirect("/Administrator/Account/Login");
+                    httpContext.Response.Redirect("/Administrator/Account/Login?ReturnUrl=" + HttpUtility.UrlEncode(url));
                     return false;
                 }
 
                 //Kiểm tra quyền truy cập
-                FunctionsDAL funcDAL = new FunctionsDAL();
-                bool access = funcDAL.GetAccess(controllerName, actionName);
-                if(access == false)
-                    httpContext.Response.Redirect("/Administrator/Error/AccessFail");
-                return access;
+                //FunctionsDAL funcDAL = new FunctionsDAL();
+                //bool access = funcDAL.GetAccess(controllerName, actionName);
+                //if(access == false)
+                //    httpContext.Response.Redirect("/Administrator/Error/AccessFail");
+                //return access;
+                return true;
             }
             catch (Exception ex)
             {

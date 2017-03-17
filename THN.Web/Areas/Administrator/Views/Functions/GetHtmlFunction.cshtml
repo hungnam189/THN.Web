@@ -1,39 +1,31 @@
-﻿@model IEnumerable<THN.Core.EntityFramework.Function>
+﻿
+@model IEnumerable<THN.Core.EntityFramework.Function>
 @{
     var lstParentLevel1 = Model.Where(l => l.Parent == 0).ToList();
 }
 <ul class="tree">
     <li>
-        <span title="collapse">
-            <input type="radio" name="Parent" value="0" data-level="0" />
-            Menu gốc
-        </span>
-        <ul>
-
+        <span><input type="checkbox" name="chkAll" value="" /> Check All</span>
+        <ul id="lstFunction">
             @foreach (var item in lstParentLevel1)
             {
                 <li class="parent_li">
                     <div class="tree-menu-item">
-                        <input type="radio" name="Parent" value="@item.ID" data-level="@item.Level" />
+                        <input type="checkbox" name="Function" value="@item.ID" data-level="@item.Level" />
                         <a data-level="@item.ID" data-id="@item.ID" href="javascript:void(0);">@item.Name</a>
-                        [<a href="javascript:void(0);" data-level="@item.Level" data-id="@item.ID" title="chỉnh sửa"><i class="fa fa-pencil"></i></a>
-                        <a href="javascript:void(0);" data-level="@item.Level" data-id="@item.ID" title="Xoá"><i class="fa fa-trash"></i></a>]
                     </div>
                     @{
                         var lstChildLevel2 = Model.Where(l => l.Parent == item.ID).ToList();
                     }
                     @if (lstChildLevel2 != null && lstChildLevel2.Count > 0)
                     {
-
                         <ul>
                             @foreach (var child in lstChildLevel2)
-                            {
+                    {
                                 <li class="">
                                     <div class="tree-menu-item">
-                                        <input type="radio" name="Parent" value="@child.ID" data-level="@child.Level" />
+                                        <input type="checkbox" name="Function" value="@child.ID" data-level="@child.Level" />
                                         <a data-level="@child.Level" data-id="@child.ID" href="javascript:void(0);">@child.Name</a>
-                                        [<a href="javascript:void(0);" data-level="@child.Level" data-id="@child.ID" title="chỉnh sửa"><i class="fa fa-pencil"></i></a>
-                                        <a href="javascript:void(0);" data-level="@child.Level" data-id="@child.ID" title="Xoá"><i class="fa fa-trash"></i></a>]
                                     </div>
                                     @{
                                         var lstChildLevel3 = Model.Where(l => l.Parent == child.ID).ToList();
@@ -46,10 +38,8 @@
                                                 <li>
 
                                                     <div class="tree-menu-item">
-                                                        @*<input type="radio" name="Parent" value="@child3.ID" data-level="@child3.Level" />*@
+                                                        <input type="checkbox" name="Function" value="@child3.ID" data-level="@child3.Level" />
                                                         <a data-level="@child3.Level" data-id="@child.ID" href="javascript:void(0);">@child3.Name</a>
-                                                        [<a href="javascript:void(0);" data-level="@child3.Level" data-id="@child3.ID" title="chỉnh sửa"><i class="fa fa-pencil"></i></a>
-                                                        <a href="javascript:void(0);" data-level="@child3.Level" data-id="@child3.ID" title="Xoá"><i class="fa fa-trash"></i></a>]
                                                     </div>
                                                 </li>
                                             }
@@ -57,13 +47,12 @@
                                         </ul>
                                     }
                                 </li>
-                            }
+                                        }
                         </ul>
-                    }
+                                        }
 
                 </li>
-            }
-
+                                        }
         </ul>
     </li>
 </ul>

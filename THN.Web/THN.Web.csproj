@@ -200,9 +200,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
     <Compile Include="Areas\Administrator\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ErrorController.cs" />
     <Compile Include="Areas\Administrator\Controllers\FunctionsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ProductController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -241,6 +243,10 @@
     <Content Include="Areas\Administrator\Views\Functions\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\Functions\Create.cshtml" />
     <Content Include="Areas\Administrator\Views\Functions\GetHtmlMenu.cshtml" />
+    <Content Include="Areas\Administrator\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Functions\AddUserForFunction.cshtml" />
+    <Content Include="Areas\Administrator\Views\Functions\GetHtmlFunction.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

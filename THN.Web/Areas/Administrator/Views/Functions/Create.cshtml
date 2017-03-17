@@ -30,7 +30,6 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="border-right: 1px solid #ececec;">
@@ -42,7 +41,13 @@
                                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Icon, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Icon, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
@@ -85,13 +90,13 @@
                                     </div>
                                 </div>
 
-                                @*<div class="form-group">
-                                    @Html.LabelFor(model => model.Parent, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.IsMenu, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Parent, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Parent, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.IsMenu)
+                                        @Html.ValidationMessageFor(model => model.IsMenu, "", new { @class = "text-danger" })
                                     </div>
-                                </div>*@
+                                </div>
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Level, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -103,6 +108,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                 <div class="easy-tree">
+                                    <input type="hidden" name="menuParent" value="@Model.ID" data-level="@Model.Level" />
                                     @Html.Action("GetHtmlMenu", "Functions")
                                 </div>
                             </div>
@@ -123,6 +129,7 @@
 @section scripts{
     <script type="text/javascript">
         $(function () {
+            setCheckedRadio();
             $('#btnSubmit').click(function (e) {
                 e.preventDefault();
                 $('.box-body form').submit();
@@ -142,5 +149,17 @@
             });
 
         });
+
+        function setCheckedRadio() {
+            var val = $('input[name="menuParent"]').val();
+            var level = $('input[name="menuParent"]').attr('data-level');
+            $('#Level').val(parseInt(level) + 1);
+            var lstParent = $('.tree').find('input[name="Parent"]');
+            $.each(lstParent, function (index, value) {
+                var id = $(value).val();
+                if (parseInt(id) === parseInt(val))
+                    $(value).attr('checked', 'checked');
+            });
+        }
     </script>   
 }

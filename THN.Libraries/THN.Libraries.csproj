@@ -44,8 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility\ExtEmail.cs" />
+    <Compile Include="Utility\EmailHelper.cs" />
     <Compile Include="Utility\Securities.cs" />
     <Compile Include="Utility\Utility.cs" />
     <Compile Include="Utility\WriteLogs.cs" />

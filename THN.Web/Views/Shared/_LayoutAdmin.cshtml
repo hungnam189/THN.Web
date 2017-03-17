@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="vi">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,6 +28,12 @@
         <!-- END: Footer-->
     </div><!-- /.wrapper -->
     @Html.Partial("_PartialAdminScripts")
+    <script type="text/javascript">
+        $(function () {
+            var liMenu = $('#menuWebsite').find('li[class="active"]');
+            $(liMenu).parent().parent().addClass('active');
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

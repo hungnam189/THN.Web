@@ -58,6 +58,7 @@
     <Compile Include="DAL\AppSettings.cs" />
     <Compile Include="DAL\BaseDAL.cs" />
     <Compile Include="DAL\FunctionsDAL.cs" />
+    <Compile Include="DAL\MemberDAL.cs" />
     <Compile Include="EntityFramework\AppSetting.cs">
       <DependentUpon>THN_WebApplication.tt</DependentUpon>
     </Compile>
@@ -104,6 +105,7 @@
     <Compile Include="Filters\AuthorizeController.cs" />
     <Compile Include="Interface\IFAccount.cs" />
     <Compile Include="Interface\IFFunction.cs" />
+    <Compile Include="Interface\IFMember.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\FunctionModel.cs" />
     <Compile Include="Models\MemberModel.cs" />

@@ -7,8 +7,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace THN.Libraries.Utility
 {
-    public class ExtEmail
+    public class EmailHelper
     {
+        /// <summary>
+        /// Check Email
+        /// </summary>
+        /// <param name="email">string input</param>
+        /// <returns>true or false</returns>
         public static bool IsEmail(string email)
         {
             var boolEmail = new EmailAddressAttribute();

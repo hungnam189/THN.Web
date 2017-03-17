@@ -63,6 +63,8 @@
           <Property Name="Visibled" Type="bit" />
           <Property Name="Parent" Type="int" />
           <Property Name="Level" Type="int" />
+          <Property Name="IsMenu" Type="bit" />
+          <Property Name="Icon" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -309,6 +311,8 @@
           <Property Name="Parent" Type="Int32" />
           <Property Name="Level" Type="Int32" />
           <NavigationProperty Name="Members" Relationship="THN_WebApplicationModel.FK_Members_Functions" FromRole="Function" ToRole="Member" />
+          <Property Name="IsMenu" Type="Boolean" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Manufacturer">
           <Key>
@@ -555,6 +559,8 @@
           <EntitySetMapping Name="Functions">
             <EntityTypeMapping TypeName="THN_WebApplicationModel.Function">
               <MappingFragment StoreEntitySet="Functions">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="IsMenu" ColumnName="IsMenu" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

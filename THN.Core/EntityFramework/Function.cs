@@ -29,6 +29,8 @@ namespace THN.Core.EntityFramework
         public Nullable<bool> Visibled { get; set; }
         public Nullable<int> Parent { get; set; }
         public Nullable<int> Level { get; set; }
+        public Nullable<bool> IsMenu { get; set; }
+        public string Icon { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Member> Members { get; set; }

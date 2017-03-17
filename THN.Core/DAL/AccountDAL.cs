@@ -13,33 +13,116 @@ namespace THN.Core.DAL
     public class AccountDAL : BaseDAL, IFAccount
     {
         private THN_WebApplicationEntities db;
+
+        /// <summary>
+        /// xoá nhân viên
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                db = new THN_WebApplicationEntities();
+                var model = db.Users.Find(id);
+                if (model == null)
+                    return -1;
+                db.Users.Remove(model);
+                if (db.SaveChanges() > 0)
+                    return 1;
+                return 0;
+
+            }catch(Exception ex)
+            {
+                WriteLog(ex);
+                return -1;
+            }
         }
 
+        /// <summary>
+        /// Get all User
+        /// </summary>
+        /// <returns></returns>
         public List<User> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                db = new THN_WebApplicationEntities();
+                return db.Users.ToList();
+            }catch(Exception ex)
+            {
+                WriteLog(ex);
+                return null;
+            }
         }
 
+        /// <summary>
+        /// Get User by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public User GetByID(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                db = new THN_WebApplicationEntities();
+                User model = new User();
+                model = db.Users.Find(id);
+                return model;
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex);
+                return null;
+            }
         }
 
+        /// <summary>
+        /// Get User By Username or Email
+        /// </summary>
+        /// <param name="uInput"></param>
+        /// <returns></returns>
         public User GetByUsernameOrEmail(string uInput)
         {
-            throw new NotImplementedException();
+            try
+            {
+                db = new THN_WebApplicationEntities();
+                User model = new User();
+                if (EmailHelper.IsEmail(uInput))
+                    model = db.Users.Where(u => u.Email.Contains(uInput)).FirstOrDefault();
+                else
+                    model = db.Users.Where(u => u.Username.Contains(uInput)).FirstOrDefault();
+                return model;
+            }
+            catch(Exception ex)
+            {
+                WriteLog(ex);
+                return null;
+            }
         }
 
+        /// <summary>
+        /// Lấy SeretKey for Username
+        /// </summary>
+        /// <param name="usernameoremail"></param>
+        /// <returns></returns>
         public string GetSeretKey(string usernameoremail)
         {
-            User u = new User();
-
-            return "";
+            User model = new User();
+            db = new THN_WebApplicationEntities();
+            if (EmailHelper.IsEmail(usernameoremail) == true)
+                model = db.Users.Where(u => u.Email.Contains(usernameoremail)).FirstOrDefault();
+            else
+                model = db.Users.Where(u => u.Username.Contains(usernameoremail)).FirstOrDefault();
+            
+            return model.SeretKey;
         }
 
+        /// <summary>
+        /// Insert new User
+        /// </summary>
+        /// <param name="add"></param>
+        /// <returns></returns>
         public int Insert(User add)
         {
             //1 : true; 0: false; -1: Exception; 2: Đã tồn tại
@@ -74,7 +157,7 @@ namespace THN.Core.DAL
                 User user = new User();
                 db = new THN_WebApplicationEntities();
                 AccountModel model = new AccountModel();
-                if (ExtEmail.IsEmail(username))
+                if (EmailHelper.IsEmail(username))
                     user = db.Users.Where(u => u.Email == username).FirstOrDefault();
                 else
                     user = db.Users.Where(u => u.Username.Contains(username)).FirstOrDefault();
@@ -115,6 +198,12 @@ namespace THN.Core.DAL
             }
         }
 
+        /// <summary>
+        /// update when user login
+        /// </summary>
+        /// <param name="ipaddress"></param>
+        /// <param name="computername"></param>
+        /// <param name="datelogin"></param>
         public void LoginUpdate(string ipaddress, string computername, DateTime datelogin)
         {
             throw new NotImplementedException();

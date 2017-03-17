@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using THN.Core.DAL;
 using THN.Core.EntityFramework;
+using THN.Core.Filters;
 using THN.Core.Models;
 
 namespace THN.Web.Areas.Administrator.Controllers
 {
-    public class FunctionsController : Controller
+    public class FunctionsController : AuthorizeController
     {
         #region GET DATA Function 
         // GET: Administrator/Functions
@@ -27,13 +28,46 @@ namespace THN.Web.Areas.Administrator.Controllers
             return PartialView(lst);
         }
 
-
-        public ActionResult AddPerson()
+        public ActionResult GetHtmlFunction()
         {
-            return View();
+            FunctionsDAL db = new FunctionsDAL();
+            var lst = db.GetAll();
+            return PartialView(lst);
         }
 
         #endregion GET DATA Function
+
+        #region UserForFunction
+        public ActionResult AddUserForFunction()
+        {
+            UserFunction model = new UserFunction();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddUserForFunction(FormCollection fc)
+        {
+            UserFunction model = new UserFunction();
+            string userID = fc["UserID"].ToString();
+            string lstFunction = fc["Function"];
+            return View(model);
+        }
+
+        public ActionResult EditUserForFunction(int userId)
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUserForFunction(UserFunction update)
+        {
+            return View(update);
+        }
+
+        #endregion UserForFunction
 
         #region Create Function
         public ActionResult Create()
@@ -53,11 +87,13 @@ namespace THN.Web.Areas.Administrator.Controllers
                     FunctionsDAL db = new FunctionsDAL();
                     Function func = new Function();
                     func.Name = add.Name;
+                    func.Icon = add.Icon;
                     func.ControllerName = add.ControllerName;
                     func.ActionName = add.ActionName;
                     func.Path = add.Path;
                     func.Visibled = true;
                     func.Parent = add.Parent;
+                    func.IsMenu = add.IsMenu;
                     func.Level = add.Level;
                     if (db.Insert(func))
                         return RedirectToAction("Create", "Functions");
@@ -90,13 +126,14 @@ namespace THN.Web.Areas.Administrator.Controllers
                     Function func = new Function();
                     func.ID = update.ID;
                     func.Name = update.Name;
+                    func.Icon = update.Icon;
                     func.ControllerName = update.ControllerName;
                     func.ActionName = update.ActionName;
                     func.Path = update.Path;
                     func.Visibled = update.Visbled;
                     func.Parent = update.Parent;
                     func.Level = update.Level;
-
+                    func.IsMenu = update.IsMenu;
                     FunctionsDAL db = new FunctionsDAL();
                     if (db.Update(func))
                         return RedirectToAction("Index", "Functions");

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using THN.Core.EntityFramework;
 using THN.Core.Interface;
+using THN.Core.Models;
 using THN.Libraries.Utility;
 
 namespace THN.Core.DAL
@@ -31,6 +32,45 @@ namespace THN.Core.DAL
             }
             return lst;
         }
+
+
+        public List<FunctionViewModel> GetMenu()
+        {
+            try
+            {
+                List<FunctionViewModel> lst = new List<FunctionViewModel>();
+                db = new THN_WebApplicationEntities();
+                //Lấy danh sách menu gốc parent = 0
+                var lstParent = db.Functions.Where(f => f.Parent == 0 && f.Level == 1 && f.IsMenu == false).ToList();
+                //Lấy menu con level 1
+                foreach(var item in lstParent)
+                {
+                    FunctionViewModel model = new FunctionViewModel();
+                    model.Id = item.ID;
+                    model.Name = item.Name;
+                    model.Icon = item.Icon;
+                    model.Controller = item.ControllerName;
+                    model.Action = item.ActionName;
+                    model.Parent = (int)item.Parent;
+                    model.IsMenu = (bool)item.IsMenu;
+                    model.Level = (int)item.Level;
+                    model.ListChild = db.Functions.Where(f => f.Parent == item.ID && f.Level == 2).Select(f => new FunctionViewModel
+                    {
+                        Id = f.ID, Name = f.Name, Icon = f.Icon, Controller = f.ControllerName,
+                        IsMenu = (bool)f.IsMenu, Level = (int)f.Level,
+                        Action = f.ActionName, Parent = (int)f.Parent
+                    }).ToList();
+                    lst.Add(model);
+                }
+                return lst;
+            }catch(Exception ex)
+            {
+                WriteLog(ex);
+                return null;
+            }
+        }
+
+        //public List<Function>
 
         /// <summary>
         /// Get Fucntion by ID
