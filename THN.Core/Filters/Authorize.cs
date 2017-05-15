@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using THN.Core.DAL;
+using THN.Core.Helper;
 using THN.Core.Models;
 using THN.Libraries.Utility;
 
@@ -60,10 +61,10 @@ namespace THN.Core.Filters
                     return false;
                 }
 
-                //Kiểm tra quyền truy cập
+                ////Kiểm tra quyền truy cập
                 //FunctionsDAL funcDAL = new FunctionsDAL();
-                //bool access = funcDAL.GetAccess(controllerName, actionName);
-                //if(access == false)
+                //bool access = funcDAL.GetAccess(controllerName, actionName, ConfigHelper.User.ID);
+                //if (access == false)
                 //    httpContext.Response.Redirect("/Administrator/Error/AccessFail");
                 //return access;
                 return true;

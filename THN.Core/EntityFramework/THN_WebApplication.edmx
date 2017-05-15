@@ -116,6 +116,8 @@
           <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="100" />
+          <Property Name="PriceOld" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PricceNew" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="ProductImages">
           <Key>
@@ -138,6 +140,7 @@
           <Property Name="Telphone" Type="varchar" MaxLength="100" />
           <Property Name="Skype" Type="varchar" MaxLength="100" />
           <Property Name="Orther" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -358,6 +361,8 @@
           <NavigationProperty Name="Category" Relationship="Self.FK_Product_CategoryID" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_MenufactureID" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="ProductImages" Relationship="Self.FK_ProductImages_Product" FromRole="Product" ToRole="ProductImages" />
+          <Property Name="PriceOld" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PricceNew" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="ProductImage">
           <Key>
@@ -381,6 +386,7 @@
           <Property Name="Telphone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Skype" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Orther" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -591,6 +597,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="THN_WebApplicationModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="PricceNew" ColumnName="PricceNew" />
+                <ScalarProperty Name="PriceOld" ColumnName="PriceOld" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
@@ -632,6 +640,7 @@
           <EntitySetMapping Name="SupportCustomers">
             <EntityTypeMapping TypeName="THN_WebApplicationModel.SupportCustomer">
               <MappingFragment StoreEntitySet="SupportCustomer">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Supporter" ColumnName="Supporter" />
                 <ScalarProperty Name="Telphone" ColumnName="Telphone" />

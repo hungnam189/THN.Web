@@ -1,10 +1,14 @@
-﻿<header class="main-header">
+﻿@{ 
+    THN.Core.Models.AccountModel accountLogin = new THN.Core.Models.AccountModel();
+    accountLogin = (THN.Core.Models.AccountModel)Session["THNLogin"];
+}
+<header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="@Url.Action("Index","Home")" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>Lê Minh</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Công ty Lê Minh</b></span>
+        <span class="logo-lg"><b>Trang Quản trị</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -217,28 +221,28 @@
                 <li class="dropdown user user-menu" style="width:200px;">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="~/Themes/backend/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs"> Administrator </span>
+                        <span class="hidden-xs"> @accountLogin.Name </span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <img src="~/Themes/backend/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                             <p>
-                                 Administrator
-                                <small>Email : trinhhungnam90@gmail.com - Mobile: 0938.681.456</small>
+                                 @accountLogin.Name
+                                <small>Email : @accountLogin.Email - Mobile: @accountLogin.Phone </small>
                             </p>
                         </li>
                         <!-- Menu Body -->
                         <li class="user-body">
                             <div class="row">
-                                <div class="col-xs-4 text-center">
+                                @*<div class="col-xs-4 text-center">
                                     <a href="#">ISC-NAMTH22</a>
+                                </div>*@
+                                <div class="col-xs-6 text-center">
+                                    <a href="#">@accountLogin.IPAdress</a>
                                 </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">172.30.27.149</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">02-03-2017 16:47:47</a>
+                                <div class="col-xs-6 text-center">
+                                    <a href="#">@accountLogin.LastDateLogin.ToString("dd-MM-yyyy HH:mm:ss")</a>
                                 </div>
                             </div>
                             <!-- /.row -->
@@ -246,10 +250,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="@Url.Action("Profile","Account")" class="btn btn-default btn-flat">Thông tin</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="@Url.Action("LogOut","Account")" class="btn btn-default btn-flat">Đăng xuất</a>
                             </div>
                         </li>
                     </ul>

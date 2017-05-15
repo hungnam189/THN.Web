@@ -1,9 +1,9 @@
-﻿@{ 
+﻿@*@{
     var funcDAL = new THN.Core.DAL.FunctionsDAL();
     var lstMenu = funcDAL.GetMenu();
 
-    var sessionModel = (THN.Core.Models.FunctionSessionModel)Session["THNMenu"];
-}
+    //var sessionModel = (THN.Core.Models.FunctionSessionModel)Session["THNMenu"];
+}*@
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -31,17 +31,17 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" id="menuWebsite">
-            <li class="header" >Chức năng Website</li>
+            <li class="header">Chức năng Website</li>
             @*<li class="active">
-                <a href="@Url.Action("Index","Home")">
-                    <i class="fa fa-dashboard"></i> <span>Trang chủ</span>
-                </a>
-            </li>*@
-            @foreach (var item in lstMenu)
+                    <a href="@Url.Action("Index","Home")">
+                        <i class="fa fa-dashboard"></i> <span>Trang chủ</span>
+                    </a>
+                </li>*@
+            @*@foreach (var item in lstMenu)
             {
                 if (item.Parent == 0 && item.IsMenu == false && item.ListChild.Count <= 0)
                 {
-                    <li data-controller="@item.Controller" data-action="@item.Action" class="@(item.Controller == sessionModel.Controller && item.Action == sessionModel.Action? "active": "")">
+                    <li data-controller="@item.Controller" data-action="@item.Action" class="">
                         <a href="@Url.Action(item.Action,item.Controller)">
                             <i class="@item.Icon"></i> <span>@item.Name</span>
                         </a>
@@ -59,34 +59,18 @@
                         </a>
                         @if (item.ListChild.Count > 0)
                         {
-                        <ul class="treeview-menu">
-                            @foreach (var item2 in item.ListChild)
-                            {
-                            <li data-parent="@item2.Parent" class="@(item2.Controller == sessionModel.Controller && item2.Action == sessionModel.Action? "active": "")"><a href="@Url.Action(item2.Action, item2.Controller)"><i class="@item2.Icon"></i> @item2.Name</a></li>
-                            }
-                        </ul>
+                            <ul class="treeview-menu">
+                                @foreach (var item2 in item.ListChild)
+                                {
+                                    <li data-parent="@item2.Parent" data-controller="@item2.Controller" data-action="@item2.Action" class="">
+                                        <a href="@Url.Action(item2.Action, item2.Controller)"><i class="@item2.Icon"></i> @item2.Name</a>
+                                    </li>
+                                }
+                            </ul>
                         }
                     </li>
                 }
-            }
-            
-            @*<li class="treeview">
-                <a href="#">
-                    <i class="fa fa-cogs"></i>
-                    <span>Hệ thống</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="@Url.Action("Index","AppSettings")"><i class="fa fa-info-circle"></i>Thông tin Web</a></li>
-                    <li><a href="@Url.Action("Index","Users")"><i class="fa fa-users"></i> Tài khoản</a></li>
-                    @*<li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                        <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                        <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                        <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-                </ul>
-            </li>*@
+            }*@
 
         </ul>
     </section>

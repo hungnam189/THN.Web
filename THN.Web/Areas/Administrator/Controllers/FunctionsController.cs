@@ -18,7 +18,7 @@ namespace THN.Web.Areas.Administrator.Controllers
         {
             FunctionsDAL db = new FunctionsDAL();
             var lst = db.GetAll();
-            return View(lst);
+            return View(lst);   
         }
 
         public ActionResult GetHtmlMenu()
@@ -48,24 +48,49 @@ namespace THN.Web.Areas.Administrator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddUserForFunction(FormCollection fc)
         {
-            UserFunction model = new UserFunction();
+            //UserFunction model = new UserFunction();
             string userID = fc["UserID"].ToString();
-            string lstFunction = fc["Function"];
-            return View(model);
-        }
-
-        public ActionResult EditUserForFunction(int userId)
-        {
-
+            int uID = 0;
+            int.TryParse(userID, out uID);
+            string strFunction = fc["Function"];
+            var lstFunction = strFunction.Split(',').ToList();
+            List<MemberModel> lst = new List<MemberModel>();
+            foreach (var item in lstFunction)
+            {
+                MemberModel m = new MemberModel();
+                m.UserID = uID;
+                m.FuncID = int.Parse(item);
+                m.CreatedBy = Core.Helper.ConfigHelper.User.Username;
+                m.CreatedDate = DateTime.Now;
+                lst.Add(m);
+            }
+            MemberDAL dal = new MemberDAL();
+            var lstCheck = dal.GetList(uID);
+            bool rs = false;
+            if (lstCheck != null && lstCheck.Count > 0)
+            {
+                rs = dal.Update(lst, uID);
+            }else
+                rs = dal.Insert(lst, uID);
+            if (rs)
+                ViewData["SuccessMsg"] = "Thêm thành công.";
+            else
+                ViewData["ErrorMsg"] = "Thêm không thành công.";
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditUserForFunction(UserFunction update)
-        {
-            return View(update);
-        }
+        //public ActionResult EditUserForFunction(int userId)
+        //{
+
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditUserForFunction(UserFunction update)
+        //{
+        //    return View(update);
+        //}
 
         #endregion UserForFunction
 

@@ -1,0 +1,99 @@
+﻿@model THN.Core.Models.CategoryModel
+@{ 
+    THN.Core.DAL.CategoryDAL dbAccess = new THN.Core.DAL.CategoryDAL();
+    List<THN.Core.Models.CategoryModel> lst = dbAccess.getAll();
+}
+<div class="form-horizontal">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Picture, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Parent, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="Parent" name="Parent" class="form-control">
+                <option value="0">Danh mục gốc</option>
+                @foreach (var item1 in lst.Where(c => c.Parent == 0).ToList())
+                {
+                    <option value="@item1.Id">|- @item1.Name</option>
+                    var lstItem = lst.Where(c => c.Parent == item1.Id).ToList();
+                    if (lstItem.Count > 0)
+                    {
+                        foreach (var item2 in lstItem)
+                        {
+                            <option value="@item2.Id">|-- @item2.Name</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Visibled, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <label>
+                <input type="checkbox" id="Visibled" name="Visibled" class="minimal" @(Model.Visibled == 1 ? "checked" : "") value="@Model.Visibled" />
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OrderBy, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.OrderBy, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.OrderBy, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MetaDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MetaDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MetaDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MetaTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MetaTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MetaKeyWord, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MetaKeyWord, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MetaKeyWord, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group hide">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="btnSubmitForm" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>

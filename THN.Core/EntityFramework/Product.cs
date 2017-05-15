@@ -42,6 +42,8 @@ namespace THN.Core.EntityFramework
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
+        public Nullable<decimal> PriceOld { get; set; }
+        public Nullable<decimal> PricceNew { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }

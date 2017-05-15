@@ -56,3 +56,10 @@ ul.tree ul li:last-child:before {
   top:10px; 
   bottom:0;
 }
+.notifyjs-corner {
+    top: 120px !important;
+    right:200px !important;
+}
+.box-footer button{
+    margin-right: 10px;
+}

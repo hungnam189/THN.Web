@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using THN.Core.EntityFramework;
+using THN.Core.Helper;
 using THN.Core.Interface;
 using THN.Core.Models;
 using THN.Libraries.Utility;
@@ -41,9 +42,17 @@ namespace THN.Core.DAL
                 List<FunctionViewModel> lst = new List<FunctionViewModel>();
                 db = new THN_WebApplicationEntities();
                 //Lấy danh sách menu gốc parent = 0
-                var lstParent = db.Functions.Where(f => f.Parent == 0 && f.Level == 1 && f.IsMenu == false).ToList();
+                //var lstParent = db.Functions.Where(f => f.Parent == 0 && f.Level == 1 && f.IsMenu == false).ToList();
+                var lstFunction = (from m in db.Members
+                           join f in db.Functions on m.FuncID equals f.ID
+                           where m.UserID == ConfigHelper.User.ID // && f.Parent == 0 && f.Level == 1 && f.IsMenu == false
+                           select f).ToList();
+                List<int> lstFuncID = lstFunction.Select(f => (int)f.Parent).Distinct().ToList();
+                List<Function> lstRoot = db.Functions.Where(f => lstFuncID.Contains(f.ID)).ToList();
+                
+                var functionRoot = lstRoot.Where(f => f.Parent == 0 && f.Level == 1 && f.IsMenu == false).ToList();
                 //Lấy menu con level 1
-                foreach(var item in lstParent)
+                foreach (var item in functionRoot)
                 {
                     FunctionViewModel model = new FunctionViewModel();
                     model.Id = item.ID;
@@ -54,12 +63,13 @@ namespace THN.Core.DAL
                     model.Parent = (int)item.Parent;
                     model.IsMenu = (bool)item.IsMenu;
                     model.Level = (int)item.Level;
-                    model.ListChild = db.Functions.Where(f => f.Parent == item.ID && f.Level == 2).Select(f => new FunctionViewModel
+                    model.ListChild = lstFunction.Where(f => f.Parent == item.ID && f.Level == 2).Select(f => new FunctionViewModel
                     {
                         Id = f.ID, Name = f.Name, Icon = f.Icon, Controller = f.ControllerName,
                         IsMenu = (bool)f.IsMenu, Level = (int)f.Level,
                         Action = f.ActionName, Parent = (int)f.Parent
-                    }).ToList();
+                    }).Distinct().ToList();
+                    //lstFunction.Remove(item); 
                     lst.Add(model);
                 }
                 return lst;
@@ -188,13 +198,18 @@ namespace THN.Core.DAL
         /// <param name="controller"></param>
         /// <param name="action"></param>
         /// <returns></returns>
-        public bool GetAccess(string controller, string action)
+        public bool GetAccess(string controller, string action, int userID)
         {
             try
             {
                 db = new THN_WebApplicationEntities();
-                var function = db.Functions.Where(f => f.ControllerName == controller && f.ActionName == action).ToList();
-                if (function != null && function.Count > 0)
+                //var function = db.Functions.Where(f => f.ControllerName == controller && f.ActionName == action).ToList();
+                var lst = (from m in db.Members
+                          join f in db.Functions on m.FuncID equals f.ID
+                          where m.UserID == userID && f.ControllerName == controller && f.ActionName == action
+                          select f).ToList();
+                
+                if (lst != null && lst.Count > 0)
                 {
                     return true;
                 }

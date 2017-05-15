@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
@@ -35,4 +35,12 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+	config.language = 'vi';
+    //Cấu hình đường dẫn đến ckfinder
+	config.filebrowserBrowseUrl = "/Themes/plugins/ckfinder/ckfinder.html";
+	config.filebrowserImageUrl = "/Themes/plugins/ckfinder/ckfinder.html?type=Images";
+	config.filebrowserFlashUrl = "/Themes/plugins/ckfinder/ckfinder.html?type=Flash";
+	config.filebrowserUploadUrl = "/Themes/plugins/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files";
+	config.filebrowserImageUploadUrl = "/Themes/plugins/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images";
+	config.filebrowserFlashUploadUrl = "/Themes/plugins/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash";
 };

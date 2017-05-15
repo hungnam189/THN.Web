@@ -5,18 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c9c52d9c55614f839ee2a73121fcedfd" Name="Diagram1">
-        <EntityTypeShape EntityType="THN_WebApplicationModel.AppSetting" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="THN_WebApplicationModel.AppSetting" Width="1.5" PointX="9.125" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="THN_WebApplicationModel.Category" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="THN_WebApplicationModel.Function" Width="1.5" PointX="5.125" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="THN_WebApplicationModel.Function" Width="1.5" PointX="5.125" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="THN_WebApplicationModel.Manufacturer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="THN_WebApplicationModel.Product" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="THN_WebApplicationModel.ProductImage" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="THN_WebApplicationModel.ProductImage" Width="1.5" PointX="5.125" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="THN_WebApplicationModel.SupportCustomer" Width="1.5" PointX="0.5" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="THN_WebApplicationModel.User" Width="1.5" PointX="9.125" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="THN_WebApplicationModel.User" Width="1.5" PointX="9.125" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="THN_WebApplicationModel.FK_Product_CategoryID" ManuallyRouted="false" />
         <AssociationConnector Association="THN_WebApplicationModel.FK_Product_MenufactureID" ManuallyRouted="false" />
         <AssociationConnector Association="THN_WebApplicationModel.FK_ProductImages_Product" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="THN_WebApplicationModel.Member" Width="1.5" PointX="7.125" PointY="1.875" />
+        <EntityTypeShape EntityType="THN_WebApplicationModel.Member" Width="1.5" PointX="7.125" PointY="1" />
         <AssociationConnector Association="THN_WebApplicationModel.FK_Members_Functions" />
         <AssociationConnector Association="THN_WebApplicationModel.FK_Members_Users" />
       </Diagram>

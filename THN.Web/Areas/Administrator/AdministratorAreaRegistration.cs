@@ -20,6 +20,12 @@ namespace THN.Web.Areas.Administrator
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 new[] { "THN.Web.Areas.Administrator.Controllers" }
             );
+            context.MapRoute(
+                "Admin",
+                "Admin/{controller}/{action}/{id}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new[] { "THN.Web.Areas.Administrator.Controllers" }
+            );
         }
     }
 }

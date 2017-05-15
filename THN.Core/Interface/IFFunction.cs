@@ -40,6 +40,6 @@ namespace THN.Core.Interface
         bool Delete(int id);
 
 
-        bool GetAccess(string controller, string action);
+        bool GetAccess(string controller, string action, int userID);
     }
 }

@@ -1,8 +1,179 @@
-﻿
+﻿@model IEnumerable<THN.Core.EntityFramework.Product>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách sản phẩm";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    
 }
 
-<h2>Danh sách sản phẩm</h2>
+<section class="content-header">
+    <h1>
+        Danh sách sản phẩm
+        <small>Sản phẩm</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index","Home")"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li><a href="@Url.Action("Index")">Sản phẩm</a></li>
+        <li class="active">Danh sách</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Thêm mới sản phẩm</h3>
+                    <div class="pull-right">
+                        <a href="@Url.Action("Create","Product")" class="btn btn-primary"><i class="fa fa-plus"></i> Tạo mới</a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form action="@Url.Action("Index","Product")" method="get">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="col-md-2">Tìm kiếm</label>
+                                        <div class="col-md-6">
+                                           @Html.Action("getViewDropListCate","Category")
+                                        </div>
+                                        @*<div class="col-md-4">
+                                            <button type="submit" class="btn btn-primary">Tìm</button>
+                                        </div>*@
+                                    </div>
+                                </div>
 
+                            </form>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <table id="tblProducts" class="table table-responsive table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên</th>
+                                        <th>Hiển thị</th>
+                                        <th>SP mới</th>
+                                        <th>SP hot</th>
+                                        <th>Trang chủ</th>
+                                        <th>Lượt xem</th>
+                                        <th>Sắp xếp</th>
+                                        <th>Nhóm</th>
+                                        <th class="hidden">mã nhóm</th>
+                                        @*<th>Người tạo</th>
+                                        <th>Người sửa</th>*@
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int index = 0;}
+                                    @foreach (var item in Model)
+                                    {
+                                        index = index + 1;
+                                        <tr><td>@index</td>
+                                            <td>
+                                                @item.Name
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <input type="checkbox" class="minimal visibled" value="@item.ID" @(item.Visibled == 1 ? "checked" : "")>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <input type="checkbox" class="minimal isnew" value="@item.ID"  @(item.IsNew == true ? "checked" : "")>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <input type="checkbox" class="minimal ishot" value="@item.ID" @(item.IsHot == true ? "checked" : "")>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                    <label>
+                                                        <input type="checkbox" class="minimal ishome" value="@item.ID" @(item.IsHome == true ? "checked" : "")>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                @(item.CountView != null ? item.CountView : 0)
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <input style="width:60px;" type="number" value="@item.OrderBy" class="form-control orderBy" data-value="@item.OrderBy" data-change="false" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @item.Category.Name
+                                            </td>
+                                            <td class="hide">@item.CategoryID</td>
+                                            @*<td>
+                                                @item.CreatedBy
+                                                <br />
+                                                @item.CreatedDate
+                                            </td>
+                                            <td>
+                                                @if (item.UpdatedBy != null)
+                                                {
+                                                    @item.UpdatedBy
+                                                    <br />
+                                                    @item.UpdatedDate
+                                                }
+
+                                            </td>*@
+                                            
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="@Url.Action("Edit","Product", new { id = item.ID})" data-id="@item.ID" title="Sửa"><i class="fa fa-edit"></i></a>
+                                                    <a href="@Url.Action("Detail","Product", new { id = item.ID})" data-id="@item.ID" title="Chi tiết"><i class="fa fa-eye"></i></a>
+                                                    <a href="@Url.Action("Delete","Product", new { id = item.ID})" data-id="@item.ID" title="Xoá"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                       
+                    </div>
+
+                </div>
+                <div class="box-footer">
+                    <div class="pull-right">
+                        <button class="btn btn-default">Cập nhật</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Css{
+    <link rel="stylesheet" href="~/Themes/backend/plugins/iCheck/all.css">
+
+}
+@section scripts{
+    <script src="~/Themes/backend/plugins/iCheck/icheck.min.js"></script>
+    <script src="~/Scripts/admin/admin.product.view.js"></script>
+    <script>
+        $(function () {
+            //Thông báo tin
+            var msgSuccess = "@Html.Raw(TempData["SuccessMsg"])";
+            var msgError = "@Html.Raw(TempData["ErrorMsg"])";
+            if (!$.isEmptyObject(msgSuccess)) {
+                $.notify(msgSuccess, "success");
+            }
+
+            if (!$.isEmptyObject(msgError)) {
+                $.notify(msgError, "warm");
+            }
+        });
+    </script>
+}

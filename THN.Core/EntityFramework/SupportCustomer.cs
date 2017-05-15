@@ -19,5 +19,6 @@ namespace THN.Core.EntityFramework
         public string Telphone { get; set; }
         public string Skype { get; set; }
         public string Orther { get; set; }
+        public string Email { get; set; }
     }
 }

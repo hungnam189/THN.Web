@@ -1,0 +1,211 @@
+﻿@model THN.Core.Models.ProductModel
+@{
+    THN.Core.DAL.CategoryDAL db = new THN.Core.DAL.CategoryDAL();
+    var lstCategories = db.getAll();
+    var lstCategoriesParent = lstCategories.Where(c => c.Parent == 0).ToList();
+}
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_Info" data-toggle="tab">Thông tin</a></li>
+        <li><a href="#tab_Detail" data-toggle="tab">Nội dung chi tiết</a></li>
+        <li><a href="#tab_SEO" data-toggle="tab">SEO</a></li>
+        <li><a href="#tab_Images" data-toggle="tab">Hình ảnh</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab_Info">
+            <div class="row">
+
+                <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên sản phẩm" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control", @placeholder = "Link rút gọn" } })
+                                @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PriceOld, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PriceOld, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PriceOld, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PriceNew, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PriceNew, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PriceNew, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.OrderBy, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.OrderBy, new { htmlAttributes = new { @class = "form-control", @value = "1" } })
+                                @Html.ValidationMessageFor(model => model.OrderBy, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label>
+                                    @*<input type="checkbox" id="IsNew" name="IsNew" class="minimal">*@
+                                    @Html.CheckBox("IsNew", Model.IsNew, new { @class = "minimal" })
+                                    Sản phẩm mới
+                                    @Html.ValidationMessageFor(model => model.IsNew, "", new { @class = "text-danger" })
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    @*<input type="checkbox" id="IsHome" name="IsHome" class="minimal" />*@
+                                    @Html.CheckBox("IsHome", Model.IsHome, new { @class = "minimal" })
+                                    @Html.LabelFor(model => model.IsHome, htmlAttributes: new { @class = "control-label" })
+                                    @Html.ValidationMessageFor(model => model.IsHome, "", new { @class = "text-danger" })
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    @*<input type="checkbox" id="IsHot" name="IsHot" class="minimal" />*@
+                                    @Html.CheckBox("IsHot", Model.IsHot, new { @class = "minimal" })
+                                    @Html.LabelFor(model => model.IsHot, htmlAttributes: new { @class = "control-label" })
+                                    @Html.ValidationMessageFor(model => model.IsHot, "", new { @class = "text-danger" })
+                                </label>
+
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    @*<input type="checkbox" id="Visibled" name="Visibled" checked="checked" class="minimal" />*@
+                                    @Html.CheckBox("Visibled", Model.Visibled, new { @class = "minimal" })
+                                    @Html.LabelFor(model => model.Visibled, htmlAttributes: new { @class = "control-label", @checked = "checked" })
+                                    @Html.ValidationMessageFor(model => model.Visibled, "", new { @class = "text-danger" })
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="CategoryID">Danh mục sản phẩm</label>
+
+                                <select id="CategoryID" name="CategoryID" class="form-control">
+                                    <option value="">-- Chọn danh mục --</option>
+                                    @if (Model != null)
+                                    {
+                                        foreach (var parent in lstCategoriesParent)
+                                        {
+                                            <option value="@parent.Id" @(Model.CategoryID == parent.Id ? "selected" : "")>@parent.Name</option>
+                                            foreach (var cate in lstCategories.Where(c => c.Parent == parent.Id).ToList())
+                                            {
+                                                <option value="@cate.Id" @(Model.CategoryID == cate.Id ? "selected" : "")>|-->@cate.Name</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group hidden">
+                                @Html.LabelFor(model => model.ManufactureID, htmlAttributes: new { @class = "control-label" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ManufactureID, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ManufactureID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label" })
+                                <input name="Picture" id="Picture" type="file" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                @*<div class="clearfix"></div>*@
+            </div>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /#tab_Info -->
+        <div class="tab-pane" id="tab_Detail">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div> <!-- /#tab_Detail -->
+        <div class="tab-pane" id="tab_SEO">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MetaTitle, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.MetaTitle, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MetaDescription, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.MetaDescription, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MetaDescription, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MetaKeyword, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.MetaKeyword, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MetaKeyword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab_Images">
+            @{
+                var currentUrl = Request.Url.AbsoluteUri;
+            }
+            @if (currentUrl.IndexOf("Product/Create") > -1)
+            {
+                <h2>Danh sách hình ảnh sẽ được mở khi sản phẩm được lưu thành công</h2>
+            }
+            else
+            {
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="pull-right">
+                            <a href="#" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới hình ảnh</a>
+                        </div>
+                        <br />
+                        <br />
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Hình</th>
+                                    <th>Title</th>
+                                    <th>Alt</th>
+                                    <th>Sắp xếp</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- /.tab-content -->
+</div>

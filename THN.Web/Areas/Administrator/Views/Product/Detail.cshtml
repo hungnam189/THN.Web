@@ -1,0 +1,187 @@
+﻿@model THN.Core.EntityFramework.Product
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slug)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Slug)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Picture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Visibled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Visibled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsNew)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsNew)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsHot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsHot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsHome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsHome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountView)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountView)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MenufactureID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MenufactureID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaKeyword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaKeyword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductTags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductTags)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

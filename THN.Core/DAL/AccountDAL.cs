@@ -13,32 +13,7 @@ namespace THN.Core.DAL
     public class AccountDAL : BaseDAL, IFAccount
     {
         private THN_WebApplicationEntities db;
-
-        /// <summary>
-        /// xoá nhân viên
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public int Delete(int id)
-        {
-            try
-            {
-                db = new THN_WebApplicationEntities();
-                var model = db.Users.Find(id);
-                if (model == null)
-                    return -1;
-                db.Users.Remove(model);
-                if (db.SaveChanges() > 0)
-                    return 1;
-                return 0;
-
-            }catch(Exception ex)
-            {
-                WriteLog(ex);
-                return -1;
-            }
-        }
-
+        
         /// <summary>
         /// Get all User
         /// </summary>
@@ -119,31 +94,6 @@ namespace THN.Core.DAL
         }
 
         /// <summary>
-        /// Insert new User
-        /// </summary>
-        /// <param name="add"></param>
-        /// <returns></returns>
-        public int Insert(User add)
-        {
-            //1 : true; 0: false; -1: Exception; 2: Đã tồn tại
-            try
-            {
-                db = new THN_WebApplicationEntities();
-                var check = db.Users.Where(u => u.Username == add.Username || u.Email == add.Email).ToList();
-                if (check.Count > 0)
-                    return 2;
-                db.Users.Add(add);
-                if(db.SaveChanges() > 0)
-                    return 1;
-                return 0;
-            }catch(Exception ex)
-            {
-                WriteLog(ex);
-                return -1;
-            }
-        }
-
-        /// <summary>
         /// Login Website
         /// </summary>
         /// <param name="username">username or email</param>
@@ -185,10 +135,14 @@ namespace THN.Core.DAL
                         model.Phone = user.Mobile;
                         model.IPAdress = user.IPAddress;
                         model.LastDateLogin = (DateTime)user.LastLogin;
+                        
                     }
                     login = model;
                 }
-                return true;
+
+                if(login != null && !string.IsNullOrEmpty(login.Username) && login.ID > 0)
+                    return true;
+                return false;
             }
             catch (Exception ex)
             {
@@ -209,9 +163,67 @@ namespace THN.Core.DAL
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Update Account
+        /// </summary>
+        /// <param name="update"></param>
+        /// <returns></returns>
         public int Update(User update)
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// xoá nhân viên
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public int Delete(int id)
+        {
+            try
+            {
+                db = new THN_WebApplicationEntities();
+                var model = db.Users.Find(id);
+                if (model == null)
+                    return -1;
+                db.Users.Remove(model);
+                if (db.SaveChanges() > 0)
+                    return 1;
+                return 0;
+
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex);
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// Insert new User
+        /// </summary>
+        /// <param name="add"></param>
+        /// <returns></returns>
+        public int Insert(User add)
+        {
+            //1 : true; 0: false; -1: Exception; 2: Đã tồn tại
+            try
+            {
+                db = new THN_WebApplicationEntities();
+                var check = db.Users.Where(u => u.Username == add.Username || u.Email == add.Email).ToList();
+                if (check.Count > 0)
+                    return 2;
+                db.Users.Add(add);
+                if (db.SaveChanges() > 0)
+                    return 1;
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex);
+                return -1;
+            }
+        }
     }
+
 }

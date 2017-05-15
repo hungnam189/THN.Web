@@ -57,8 +57,10 @@
     <Compile Include="DAL\AccountDAL.cs" />
     <Compile Include="DAL\AppSettings.cs" />
     <Compile Include="DAL\BaseDAL.cs" />
+    <Compile Include="DAL\CategoryDAL.cs" />
     <Compile Include="DAL\FunctionsDAL.cs" />
     <Compile Include="DAL\MemberDAL.cs" />
+    <Compile Include="DAL\ProductDAL.cs" />
     <Compile Include="EntityFramework\AppSetting.cs">
       <DependentUpon>THN_WebApplication.tt</DependentUpon>
     </Compile>
@@ -101,14 +103,21 @@
     <Compile Include="EntityFramework\User.cs">
       <DependentUpon>THN_WebApplication.tt</DependentUpon>
     </Compile>
+    <Compile Include="Filters\AccountLogin.cs" />
     <Compile Include="Filters\Authorize.cs" />
     <Compile Include="Filters\AuthorizeController.cs" />
+    <Compile Include="Helper\ConfigHelper.cs" />
+    <Compile Include="Helper\ValidateMsgHelper.cs" />
     <Compile Include="Interface\IFAccount.cs" />
+    <Compile Include="Interface\IFCategory.cs" />
     <Compile Include="Interface\IFFunction.cs" />
     <Compile Include="Interface\IFMember.cs" />
+    <Compile Include="Interface\IFProduct.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\FunctionModel.cs" />
     <Compile Include="Models\MemberModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

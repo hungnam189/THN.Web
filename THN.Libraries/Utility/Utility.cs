@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace THN.Libraries.Utility
@@ -32,6 +32,27 @@ namespace THN.Libraries.Utility
             return ip;
         }
 
+
+        /// <summary>
+        /// Lay MAC Address
+        /// </summary>
+        /// <returns></returns>
+        public static string GetMACAddress()
+        {
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            String sMacAddress = string.Empty;
+            foreach (NetworkInterface adapter in nics)
+            {
+                if (sMacAddress == String.Empty)// only return MAC Address from first card  
+                {
+                    IPInterfaceProperties properties = adapter.GetIPProperties();
+                    sMacAddress = adapter.GetPhysicalAddress().ToString();
+                }
+            }
+            return sMacAddress;
+        }
+
+
         /// <summary>
         /// random chuỗi
         /// </summary>
@@ -50,6 +71,32 @@ namespace THN.Libraries.Utility
             {
                 return "THN@030290";
             }
+        }
+
+        /// <summary>
+        /// Chuyển title thành Slug
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static string GetAlias(string title)
+        {
+            string value = title.Trim();
+            string st = "([!@#$%^&*()_+ =~`<>,.?/\":;'{}])";
+            Regex v_reg_regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
+            string v_str_FormD = value.Normalize(NormalizationForm.FormD);
+
+            v_str_FormD = Regex.Replace(v_str_FormD, st, "-", RegexOptions.None);
+            v_str_FormD = v_str_FormD.Replace("--", "-");
+            v_str_FormD = v_str_FormD.Replace("---", "-");
+            v_str_FormD = v_str_FormD.Replace("----", "-");
+            v_str_FormD = v_str_FormD.Replace("-----", "-");
+            v_str_FormD = v_str_FormD.Replace("------", "-");
+            v_str_FormD = v_str_FormD.Replace("-------", "-");
+            v_str_FormD = v_str_FormD.Replace("\\", "-");
+            v_str_FormD = v_str_FormD.Replace("|", "-");
+
+            value = v_reg_regex.Replace(v_str_FormD, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D').ToLower();
+            return value;
         }
     }
 }

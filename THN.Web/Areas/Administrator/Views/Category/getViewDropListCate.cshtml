@@ -1,0 +1,18 @@
+﻿@model IEnumerable<THN.Core.Models.CategoryModel>
+@{
+    var lstCategoriesParent = Model.Where(c => c.Parent == 0).ToList();
+}
+<select id="Category" name="Category" class="form-control">
+    <option value="">-- Chọn danh mục --</option>
+    @if (Model != null)
+    {
+        foreach (var parent in lstCategoriesParent)
+        {
+            <option value="@parent.Id">@parent.Name</option>
+            foreach (var cate in Model.Where(c => c.Parent == parent.Id).ToList())
+            {
+                <option value="@cate.Id">|-->@cate.Name</option>
+            }
+        }
+    }
+</select>
